@@ -47,7 +47,7 @@
           all-formats = ./all-formats.nix;
         }
         // (nixlib.lib.mapAttrs' (file: _: {
-          name = lib.traceVal ( nixlib.lib.removeSuffix ".nix" file );
+          name = nixlib.lib.removeSuffix ".nix" file;
           # The exported module should include the internal format* options
           value.imports = [(./formats + "/${file}") ./format-module.nix];
         }) (builtins.readDir ./formats));
@@ -84,7 +84,7 @@
               }
           )
           customFormats;
-        formatModule = lib.traceVal builtins.getAttr (lib.traceVal format) (self.nixosModules // extraFormats);
+        formatModule = builtins.getAttr format (self.nixosModules // extraFormats);
         image = nixosSystem {
           inherit pkgs specialArgs;
           system =
@@ -102,7 +102,7 @@
             ++ modules;
         };
       in
-        lib.traceVal(image.config.system.build).${lib.traceVal image.config.formatAttr};
+        image.config.system.build.${image.config.formatAttr};
     }
     //
     # Binary and Devshell outputs (depend on nixpkgs)
