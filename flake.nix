@@ -102,7 +102,7 @@
             ++ modules;
         };
       in
-        image.config.system.build.${lib.traceVal image.config.formatAttr};
+        lib.traceVal(image.config.system.build).${lib.traceVal image.config.formatAttr};
     }
     //
     # Binary and Devshell outputs (depend on nixpkgs)
