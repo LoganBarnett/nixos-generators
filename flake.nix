@@ -84,7 +84,7 @@
               }
           )
           customFormats;
-        formatModule = builtins.getAttr format (self.nixosModules // extraFormats);
+        formatModule = lib.traceVal builtins.getAttr format (self.nixosModules // extraFormats);
         image = nixosSystem {
           inherit pkgs specialArgs;
           system =
