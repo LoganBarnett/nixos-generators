@@ -47,7 +47,7 @@
           all-formats = ./all-formats.nix;
         }
         // (nixlib.lib.mapAttrs' (file: _: {
-          name = nixlib.lib.removeSuffix ".nix" file;
+          name = lib.traceVal ( nixlib.lib.removeSuffix ".nix" file );
           # The exported module should include the internal format* options
           value.imports = [(./formats + "/${file}") ./format-module.nix];
         }) (builtins.readDir ./formats));
