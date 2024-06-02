@@ -16,6 +16,7 @@
   exclude =
     (lib.optionalAttrs (system != "aarch64-linux") {
       sd-aarch64 = true;
+      sd-image-raspberrypi = true;
       sd-aarch64-installer = true;
     })
     // (lib.optionalAttrs (system != "x86_64-linux") {
